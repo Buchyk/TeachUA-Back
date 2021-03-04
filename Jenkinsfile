@@ -12,10 +12,9 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
-    }
     stage('DeployToStaging') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'backend', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
@@ -43,5 +42,5 @@ pipeline {
                 }
             }
         }
-    
+    }
 }
