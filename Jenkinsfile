@@ -10,8 +10,38 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh 'mvn -B -DskipTests clean package' 
-                archiveArtifacts artifacts: 'dist/dev.zip'
             }
         }
     }
+    stage('DeployToStaging') {
+            when {
+                branch 'master'
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'backend', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                    sshPublisher(
+                        failOnError: true,
+                        continueOnError: false,
+                        publishers: [
+                            sshPublisherDesc(
+                                configName: 'staging',
+                                sshCredentials: [
+                                    username: "$USERNAME",
+                                    encryptedPassphrase: "$USERPASS"
+                                ], 
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: 'workspace/BackEnd-Build1_main/target/TeachUA-1.0.war',
+                                        removePrefix: 'workspace/BackEnd-Build1_main/target/',
+                                        remoteDirectory: '/home/taras/back',
+//                                        execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
+            }
+        }
+    
 }
