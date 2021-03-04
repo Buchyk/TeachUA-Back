@@ -33,7 +33,7 @@ pipeline {
                                         sourceFiles: 'target/TeachUA-1.0.war',
                                         removePrefix: 'target/',
                                         remoteDirectory: '/home/taras/back/www/back',
-                                         execCommand: 'sudo mv /home/taras/back/www/back/TeachUA-1.0.war /home/taras/backwww/back/dev.war' 
+                                         execCommand: 'sudo mv /home/taras/back/www/back/TeachUA-1.0.war /home/taras/back/www/back/dev.war' 
                                         //                                        execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
                                     )
                                 ]
