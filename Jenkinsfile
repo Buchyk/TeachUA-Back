@@ -32,8 +32,8 @@ pipeline {
                                     sshTransfer(
                                         sourceFiles: 'target/TeachUA-1.0.war',
                                         removePrefix: 'target/',
-                                        remoteDirectory: '/home/taras/back/www/back',
-                                         execCommand: 'sudo mv /home/taras/back/www/back/TeachUA-1.0.war /home/taras/back/www/back/dev.war' 
+                                        remoteDirectory: '/home/teachua/www/back',
+                                         execCommand: 'sudo mv /home/teachua/www/back/TeachUA-1.0.war /home/teachua/www/back/dev.war' 
                                         //                                        execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
                                     )
                                 ]
