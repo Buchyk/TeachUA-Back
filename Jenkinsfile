@@ -4,10 +4,10 @@ pipeline {
             image 'maven:3-openjdk-8' 
             args '-v /root/.m2:/root/.m2' 
             environment:
-             - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} 
-             - DATASOURCE_URL=${DATASOURCE_URL}  
-             - DATASOURCE_USER=${DATASOURCE_USER}  
-             - JWT_SECRET=${JWT_SECRET}
+             - DATASOURCE_PASSWORD= ${DATASOURCE_PASSWORD} 
+             - DATASOURCE_URL= ${DATASOURCE_URL}  
+             - DATASOURCE_USER= ${DATASOURCE_USER}  
+             - JWT_SECRET= ${JWT_SECRET}
         }
     }
     stages {
