@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        JWT_SECRET = '$JWT_SECRET'
+    }
     agent {
         docker {
             image 'maven:3-openjdk-8' 
@@ -6,6 +9,13 @@ pipeline {
         }
     }
     stages {
+        stage('Print environment') { 
+            steps {
+                echo "$JWT_SECRET"
+                echo '$JWT_SECRET'
+                echo '$JWT_SECRET'
+            }
+        }
         stage('Build') { 
             steps {
                 echo 'Running build automation'
