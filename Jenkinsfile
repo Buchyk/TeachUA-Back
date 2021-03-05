@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        JWT_SECRET = '$JWT_SECRET'
+        JWT_SECRET = "$JWT_SECRET"
     }
     agent {
         docker {
@@ -11,9 +11,9 @@ pipeline {
     stages {
         stage('Print environment') { 
             steps {
-                echo "$JWT_SECRET"
-                echo '$JWT_SECRET'
-                echo '$JWT_SECRET'
+                echo "${DATASOURCE_USER}"
+                echo "${JWT_SECRET}"
+                echo "$(JWT_SECRET)"
             }
         }
         stage('Build') { 
