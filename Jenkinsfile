@@ -1,11 +1,9 @@
 pipeline {
-    environment {
-        JWT_SECRET = "$JWT_SECRET"
-    }
     agent {
         docker {
             image 'maven:3-openjdk-8' 
             args '-v /root/.m2:/root/.m2' 
+            
         }
     }
     stages {
@@ -19,7 +17,7 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'Running build automation'
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn -B -DDATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} -DDATASOURCE_URL=${DATASOURCE_URL} -DDATASOURCE_USER=${DATASOURCE_USER}  -DJWT_SECRET=${JWT_SECRET} clean package' 
             }
         }
     stage('DeployToStaging') {
