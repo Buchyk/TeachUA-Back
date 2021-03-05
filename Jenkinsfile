@@ -17,7 +17,7 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'Running build automation'
-                sh 'mvn -B -D DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} -D DATASOURCE_URL=${DATASOURCE_URL} -D DATASOURCE_USER=${DATASOURCE_USER}  -D JWT_SECRET=${JWT_SECRET} clean package' 
+                sh 'mvn -D DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} -D DATASOURCE_URL=${DATASOURCE_URL} -D DATASOURCE_USER=${DATASOURCE_USER}  -D JWT_SECRET=${JWT_SECRET} clean package' 
             }
         }
     stage('DeployToStaging') {
