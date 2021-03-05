@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo "${DATASOURCE_USER}"
                 echo "${JWT_SECRET}"
-                echo "$(JWT_SECRET)"
+ //               echo "$(JWT_SECRET)"
             }
         }
         stage('Build') { 
