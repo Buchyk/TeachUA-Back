@@ -3,7 +3,7 @@ pipeline {
         docker {
             image 'maven:3-openjdk-8' 
             args '-v /root/.m2:/root/.m2' 
-            
+            args '-D DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} -D DATASOURCE_URL=${DATASOURCE_URL} -D DATASOURCE_USER=${DATASOURCE_USER}  -D JWT_SECRET=${JWT_SECRET}'
         }
     }
     stages {
@@ -17,7 +17,7 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'Running build automation'
-                sh 'mvn -D DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} -D DATASOURCE_URL=${DATASOURCE_URL} -D DATASOURCE_USER=${DATASOURCE_USER}  -D JWT_SECRET=${JWT_SECRET} clean package' 
+                sh 'mvn clean package' 
             }
         }
     stage('DeployToStaging') {
