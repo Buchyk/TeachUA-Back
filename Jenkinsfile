@@ -2,8 +2,9 @@ pipeline {
     agent {
         docker {
            
-            image 'maven:3-openjdk-8'.withRun('-e "DATASOURCE_URL=${DATASOURCE_URL}"') 
+            image 'maven:3-openjdk-8'
             args '-v /root/.m2:/root/.m2' 
+            args '-e DATASOURCE_URL=${DATASOURCE_URL}'
         }
     }
     stages {
