@@ -7,7 +7,7 @@ pipeline {
              - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} 
              - DATASOURCE_URL=${DATASOURCE_URL}  
              - DATASOURCE_USER=${DATASOURCE_USER}  
-             - JWT_SECRET=${JWT_SECRET}'
+             - JWT_SECRET=${JWT_SECRET}
         }
     }
     stages {
