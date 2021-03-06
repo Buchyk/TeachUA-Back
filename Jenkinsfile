@@ -10,10 +10,10 @@ pipeline {
            
             image 'maven:3-openjdk-8'
             args '-v /root/.m2:/root/.m2' 
-            args '-e DATASOURCE_URL=${DATASOURCE_URL}'
-            args '-e DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD}'
-            args '-e DATASOURCE_USER=${DATASOURCE_USER}'
-            args '-e JWT_SECRET=${JWT_SECRET}'
+//            args '-e DATASOURCE_URL=${DATASOURCE_URL}'
+ //           args '-e DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD}'
+  //          args '-e DATASOURCE_USER=${DATASOURCE_USER}'
+    //        args '-e JWT_SECRET=${JWT_SECRET}'
         }
     }
     stages {
@@ -26,10 +26,6 @@ pipeline {
         }
         stage('Build') { 
             steps {
- //                withEnv(['DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD} '])
-  //               withEnv(['DATASOURCE_URL=${DATASOURCE_URL} '])
-   //              withEnv(['DATASOURCE_USER=${DATASOURCE_USER} '])
-    //             withEnv(['JWT_SECRET=${JWT_SECRET} '])
                 echo 'Running build automation'
                 sh 'mvn clean package' 
             }
