@@ -10,12 +10,7 @@ pipeline {
     //        args '-e JWT_SECRET=${JWT_SECRET}'
         }
     }
-      environment { 
-            DATASOURCE_URL = '${DATASOURCE_URL}'
-            DATASOURCE_PASSWORD = '${DATASOURCE_PASSWORD}'
-            DATASOURCE_USER = '${DATASOURCE_USER}'
-           JWT_SECRET = '${JWT_SECRET}'
-    }
+   
     stages {
         stage('Print environment') { 
             steps {
