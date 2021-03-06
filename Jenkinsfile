@@ -20,8 +20,9 @@ pipeline {
         stage('Print environment') { 
             steps {
                 echo "${DATASOURCE_USER}"
+                echo "${DATASOURCE_PASSWORD}"
+                echo "${DATASOURCE_URL}"
                 echo "${JWT_SECRET}"
- //               echo "$(JWT_SECRET)"
             }
         }
         stage('Build') { 
@@ -48,7 +49,6 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        execCommand: ' sudo rm -rf /home/teachua/www/back/dev/ && sudo rm -rf/home/teachua/www/back/dev.war'
                                         sourceFiles: 'target/TeachUA-1.0.war',
                                         removePrefix: 'target/',
                                         remoteDirectory: '/home/teachua/www/back',
