@@ -1,7 +1,6 @@
 pipeline {
     agent {
         docker {
-           
             image 'maven:3-openjdk-8'
             args '-v /root/.m2:/root/.m2' 
         }
@@ -11,7 +10,8 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'Running build automation'
-                sh 'mvn clean package' 
+                sh 'mvn clean package'
+                sh 'tar czf app-$BUILD_NUBLER.tar.gz target/*' 
                 sh 'echo ${DATASOURCE_URL}' 
             }
         }
@@ -30,8 +30,7 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'target/TeachUA-1.0.war',
-                                        removePrefix: 'target/',
+                                        sourceFiles: 'app-$BUILD_NUBLER.tar.gz',
                                         remoteDirectory: '/',
                                         
                                     )
