@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh 'mvn clean package'
-                sh 'tar czf app-$BUILD_NUBLER.tar.gz target/*' 
+                sh 'tar czf app-${BUILD_NUBLER}.tar.gz target/*' 
                 sh 'echo ${DATASOURCE_URL}' 
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'app-$BUILD_NUBLER.tar.gz',
+                                        sourceFiles: 'app-${BUILD_NUBLER}.tar.gz',
                                         remoteDirectory: '/',
                                         
                                     )
