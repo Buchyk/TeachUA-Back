@@ -1,12 +1,5 @@
 pipeline {
-    environment { 
-    //        DATASOURCE_URL = '${DATASOURCE_URL}'
-  //          DATASOURCE_PASSWORD = '${DATASOURCE_PASSWORD}'
- //           DATASOURCE_USER = '${DATASOURCE_USER}'
-//            JWT_SECRET = '${JWT_SECRET}'
-    }
     agent {
-        
         docker {
            
             image 'maven:3-openjdk-8'
@@ -16,6 +9,12 @@ pipeline {
   //          args '-e DATASOURCE_USER=${DATASOURCE_USER}'
     //        args '-e JWT_SECRET=${JWT_SECRET}'
         }
+    }
+      environment { 
+            DATASOURCE_URL = '${DATASOURCE_URL}'
+            DATASOURCE_PASSWORD = '${DATASOURCE_PASSWORD}'
+            DATASOURCE_USER = '${DATASOURCE_USER}'
+           JWT_SECRET = '${JWT_SECRET}'
     }
     stages {
         stage('Print environment') { 
