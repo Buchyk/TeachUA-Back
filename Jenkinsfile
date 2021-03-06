@@ -4,27 +4,42 @@ pipeline {
            
             image 'maven:3-openjdk-8'
             args '-v /root/.m2:/root/.m2' 
-//            args '-e DATASOURCE_URL=${DATASOURCE_URL}'
- //           args '-e DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD}'
-  //          args '-e DATASOURCE_USER=${DATASOURCE_USER}'
-    //        args '-e JWT_SECRET=${JWT_SECRET}'
         }
     }
    
     stages {
-        stage('Print environment') { 
-            steps {
-                echo "${DATASOURCE_USER}"
-                echo "${DATASOURCE_PASSWORD}"
-                echo "${DATASOURCE_URL}"
-                echo "${JWT_SECRET}"
-            }
-        }
         stage('Build') { 
             steps {
                 echo 'Running build automation'
                 sh 'mvn clean package' 
                 sh 'echo ${DATASOURCE_URL}' 
+            }
+        }
+         stage('Push to artifact server') { 
+             steps {
+                withCredentials([usernamePassword(credentialsId: 'artifact', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                    sshPublisher(
+                        failOnError: true,
+                        continueOnError: false,
+                        publishers: [
+                            sshPublisherDesc(
+                                configName: 'artifact_server',
+                                sshCredentials: [
+                                    username: "$USERNAME",
+                                    encryptedPassphrase: "$USERPASS"
+                                ], 
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: 'target/TeachUA-1.0.war',
+                                        removePrefix: 'target/',
+                                        remoteDirectory: '/',
+                                        
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
             }
         }
     stage('DeployToStaging') {
