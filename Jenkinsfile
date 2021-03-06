@@ -31,7 +31,7 @@ pipeline {
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'app-${BUILD_NUMBER}.tar.gz',
-                                        remoteDirectory: '/',
+                                        remoteDirectory: '/artifactory',
                                         
                                     )
                                 ]
