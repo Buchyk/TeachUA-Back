@@ -1,5 +1,11 @@
 pipeline {
     agent {
+        environment { 
+            DATASOURCE_URL = '${DATASOURCE_URL}'
+            DATASOURCE_PASSWORD = '${DATASOURCE_PASSWORD}'
+            DATASOURCE_USER = '${DATASOURCE_USER}'
+            JWT_SECRET = '${JWT_SECRET}'
+    }
         docker {
            
             image 'maven:3-openjdk-8'
@@ -46,6 +52,7 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
+                                        execCommand: ' sudo rm -rf /home/teachua/www/back/dev/ && sudo rm -rf/home/teachua/www/back/dev.war'
                                         sourceFiles: 'target/TeachUA-1.0.war',
                                         removePrefix: 'target/',
                                         remoteDirectory: '/home/teachua/www/back',
