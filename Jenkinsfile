@@ -1,11 +1,12 @@
 pipeline {
-    agent {
-        environment { 
-            DATASOURCE_URL = '${DATASOURCE_URL}'
-            DATASOURCE_PASSWORD = '${DATASOURCE_PASSWORD}'
-            DATASOURCE_USER = '${DATASOURCE_USER}'
-            JWT_SECRET = '${JWT_SECRET}'
+    environment { 
+    //        DATASOURCE_URL = '${DATASOURCE_URL}'
+  //          DATASOURCE_PASSWORD = '${DATASOURCE_PASSWORD}'
+ //           DATASOURCE_USER = '${DATASOURCE_USER}'
+//            JWT_SECRET = '${JWT_SECRET}'
     }
+    agent {
+        
         docker {
            
             image 'maven:3-openjdk-8'
@@ -29,6 +30,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh 'mvn clean package' 
+                sh 'echo ${DATASOURCE_URL}' 
             }
         }
     stage('DeployToStaging') {
