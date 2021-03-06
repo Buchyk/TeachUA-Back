@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh 'mvn clean package'
-                sh 'tar czf app-${BUILD_NUMBER}.tar.gz target/*' 
+                sh 'tar czf app-${BUILD_NUMBER}.tar.gz target/*.war' 
                 sh 'echo ${DATASOURCE_URL}' 
             }
         }
