@@ -1,4 +1,5 @@
 pipeline {
+    options { timestamps() }
     agent {
         docker {
             image 'maven:3-openjdk-8'
@@ -7,12 +8,17 @@ pipeline {
     }
    
     stages {
+        stage('Test') { 
+            steps {
+                echo 'Running automation test'
+                sh 'mvn test'
+            }
+        }
         stage('Build') { 
             steps {
                 echo 'Running build automation'
                 sh 'mvn clean package'
                 sh 'tar czf app-${BUILD_NUMBER}.tar.gz target/*.war' 
-                sh 'echo ${DATASOURCE_URL}' 
             }
         }
          stage('Push to artifact server') { 
